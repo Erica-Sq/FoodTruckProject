@@ -1,12 +1,13 @@
 # FoodTruckProject
 
 # Overview/Description
-		This project was meant to take user input to compile an average rating of the users food truck input. Each food truck should be given a unique user ID at the time of input. I attempted to use constructors, objects, and encapsulation amongst other topics from the course. 
+		 This program allows user input on a variety of characteristics of foodtrucks, then is able to compile the input and provide a processed display.
+
+		 In order to use this software, a user must input the name, food type, and rating of a food truck. Once the user inputs all the information they would like to process, the program returns a menu. From this menu, the user is asked whether they would like to see a list of the food trucks, the average rating of food trucks, the highest rated food truck, or to end the program.  
+
+		 This program utilizes object initiation, toStrings, and encapsulation amongst others.
 # Technologies Used
-	Java, OOP, Eclipse
+		Java, OOP, Eclipse
 
 # Lessons Learned
-
-I attended the tutoring hours on Saturday. I thought I had the program down, and then I got confused and lost along the way. I was embarrassed to ask for help until it was too late. I then was unable to get back on track. My greatest lesson learned wa that I need to just reach out for help. I know I could've completed this project if i had simply asked for help. I will be asking for help a lot more frequently. 
-
-# 
+		I was able to utilize the TA hours after class to reproduce this project, after my first attempt. I was also able to recognize the patterns in the code to decipher when methods needed to be used and why. 
