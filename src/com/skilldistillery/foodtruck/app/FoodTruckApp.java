@@ -5,115 +5,121 @@ import java.util.Scanner;
 import com.skilldistillery.foodtruck.entities.FoodTruck;
 
 public class FoodTruckApp {
-	private FoodTruck[] trucks = new FoodTruck[5] 
-;
+	private FoodTruck[] trucks = new FoodTruck[5];
+	private Scanner sc = new Scanner(System.in);
+	private Object name;
+
 	public static void main(String[] args) {
 		FoodTruckApp fta = new FoodTruckApp();
 		fta.run();
 	}
 
-	Scanner sc = new Scanner(System.in);
-	private FoodTruck[] foodTrucks;
-
 	public void run() {
-		Scanner sc = new Scanner(System.in);
-		String Str = "";
-//
-//			System.out.println("Enter Food Truck Name");
-//			String name = sc.next();
-//			
-//			System.out.println("Enter food type");
-//			String foodType = sc.next();
-//			
-//			System.out.println("Enter food truck rating from 1-10");
-//			int rating= sc.nextInt();
-//			
-////		do {
-//			String[] menuOptions = {"List All FoodTrucks \n", "See FoodTruck avg rating \n", "Display Highest-rated FoodTruck \n", "Type QUIT to quit program"};
-//
-//			System.out.println("Choose from the following menu:");
-//			for (int i=0; i<menuOptions.length; i++) {
-//				System.out.println((i + 1) + ". " + menuOptions[i]) ;
-//			}		
-//			Str = sc.next();
-//			System.out.println(FoodTruck.response(Str));
-//		} 
-//	
-//    ArrayList<FoodTruck> foodTrucks = new ArrayList<>();
-//
-//    System.out.print("Enter the number of food trucks: ");
-//    int numFoodTrucks = scanner.nextInt();
-//    scanner.nextLine(); // Consume the newline character
-//
-//    for (int i = 0; i < numFoodTrucks; i++) {
-//        System.out.println("Enter information for Food Truck #" + (i + 1) + ":");
-//
-//        System.out.print("Name: ");
-//        String name = sc.nextLine();
-//
-//        System.out.print("Food Type: ");
-//        String foodType = sc.nextLine();
-//
-//        System.out.print("Rating: ");
-//        int rating = sc.nextInt();
-//        sc.nextLine(); // Consume the newline character
-//
-//        // Create a FoodTruck object and add it to the collection
-//        FoodTruck truck = new FoodTruck(name, foodType, rating);
-//        foodTrucks.add(truck);
-//    }
-//
-//    // Close the scanner when done
-//    scanner.close();
-//
-//    // Display the Food Truck information
-//    System.out.println("Food Truck Information:");
-//    for (FoodTruck truck : foodTrucks) {
-//        System.out.println("Name: " + truck.getName());
-//        System.out.println("Food Type: " + truck.getFoodType());
-//        System.out.println("Rating: " + truck.getRating());
-//        System.out.println();
-//    }
-////	while (!Str.equals("QUIT"));
-////	System.out.println("Thanks for your input.GoodBye.");
-////	
-////	sc.close();
-////	
-//	
-//	}
-////
-////	trucks[0] = new FoodTruck ("Fifis Fire Burgers", "American" , 4);
-////	trucks[1] = new FoodTruck ( "Dan's Dank Burritos", "Mexican", 2);
-////	trucks[2] = new FoodTruck ( "Flying FishFood", "Japanese", 1); 
-////	trucks[3] = new FoodTruck ( "The Lunchroom", "Vegan", 3);
-////	trucks[4] = new FoodTruck ("Tikas Tiki Table", "Hawaiian", 5);
-////
-////}
+		createTrucks();
+		mainMenu();
+
+	}
+
+	public void createTrucks() {
+		for (int i = 0; i < trucks.length; i++) {
+			System.out.println("Enter information for Food Truck #" + (i + 1) + ":  Or Quit for Foodtruck Name");
+
+			System.out.print("Name: ");
+			String name = sc.nextLine();
+
+			if (name.equalsIgnoreCase("Quit")) {
+				break;
+			}
+
+			System.out.print("Food Type: ");
+			String foodType = sc.nextLine();
+
+			System.out.print("Rating: ");
+			int rating = sc.nextInt();
+			sc.nextLine();
+			FoodTruck newTruck = new FoodTruck(name, foodType, rating);
+			trucks[i] = newTruck;
+			System.out.println();
+		} 
+		
+	}
+
+	
+
+	public void calculateAvg() {
+		double sum = 0;
+		double length = 0;
+		double average = 0;
+		for (int i = 0; i < trucks.length; i++) {
+			if (trucks[i] != null) {
+				sum += trucks[i].getRating();
+
+			}
+		}
+		for (int i = 0; i < trucks.length; i++) {
+			if (trucks[i] != null) {
+				length++;
+			}
+		}
+		average = sum / length;
+		System.out.println("Avg Rating: " + average);
+
+	}
+
+	public void highestRating() {
+		int maximum = 0;
+		String mobile = "";
 
 		for (int i = 0; i < trucks.length; i++) {
-            System.out.println("Enter information for Food Truck #" + (i + 1) + ":");
+			if (trucks[i] != null) {
 
-            System.out.print("Name: ");
-            String name = sc.nextLine();
+				if (maximum < trucks[i].getRating()) {
+					maximum = trucks[i].getRating();
+					mobile = trucks[i].getFoodType();
+				}
 
-            System.out.print("Food Type: ");
-            String foodType = sc.nextLine();
+			}
 
-            System.out.print("Rating: ");
-            int rating = sc.nextInt();
-            sc.nextLine(); 
-            trucks[i] = new FoodTruck(name, foodType, rating);
-        }
+		}
+		System.out.println();
+		System.out.println("Highest Rated: " + mobile);
+	}
 
-        sc.close();
+	public void mainMenu() {
+		System.out.println("1: List all existing food trucks \n 2: See the avg rating of food trucks \n"
+				+ " 3: Display the highest-rated food truck \n 4: Quit program");
+		int choice = sc.nextInt();
 
-        int totalRating = 0;
-        for (FoodTruck truck : foodTrucks) {
-            totalRating += truck.getRating();
-        }
-        double averageRating = (double) totalRating / foodTrucks.length;
+		switch (choice) {
 
-        System.out.println("Average Rating for Food Trucks: " + averageRating);
-    }
+		case 1:
+			createTrucks();
+			mainMenu();
+
+			break;
+
+		case 2:
+			calculateAvg();
+			mainMenu();
+
+			break;
+
+		case 3:
+			highestRating();
+			mainMenu();
+
+			break;
+		case 4:
+			System.out.println("See you later!");
+
+			break;
+
+		default:
+			System.err.println("input not recognized");
+			mainMenu();
+
+		}
+ 
+	}
+	
 }
-			
